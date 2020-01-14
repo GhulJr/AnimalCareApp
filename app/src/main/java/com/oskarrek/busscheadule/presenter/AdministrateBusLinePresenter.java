@@ -79,7 +79,7 @@ public class AdministrateBusLinePresenter implements AdministrateBusLineMVP.Pres
         this.isModified = true;
         for(Route route : busLine.getRoutes()){
             if(route.getId() == routeId) {
-                route.getBusStopsIds().remove(busStopId);
+                route.getBusStopsIds().remove(Integer.valueOf(busStopId));
                 view.updateChanges(busLine);
                 break;
             }

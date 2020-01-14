@@ -1,5 +1,8 @@
 package com.oskarrek.busscheadule.presenter;
 
+import com.oskarrek.busscheadule.interfaces.AdministrateBusLineMVP;
+import com.oskarrek.busscheadule.interfaces.AdministrateBusStopMVP;
+import com.oskarrek.busscheadule.interfaces.UserBusLineMVP;
 import com.oskarrek.busscheadule.interfaces.UserBusStopMVP;
 import com.oskarrek.busscheadule.model.BusLine;
 import com.oskarrek.busscheadule.model.BusStop;
@@ -42,13 +45,16 @@ public class BusStopPresenter implements UserBusStopMVP.Presenter {
 
     @Override
     public List<BusStop> searchBusStops(String stopAddress) {
+
+        if(stopAddress == null || stopAddress.isEmpty())
+            return null;
+
         List<BusStop> allStops = repository.getBusStops();
 
         List<BusStop> searchedLines = new ArrayList<>();
         for (BusStop busStop : allStops) {
-            if (busStop.getAddress().contains(stopAddress.toLowerCase())) {
+            if (busStop.getAddress().toLowerCase().contains(stopAddress.toLowerCase())) {
                 searchedLines.add(busStop);
-                break;
             }
         }
 
